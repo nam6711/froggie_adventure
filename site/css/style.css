@@ -1,0 +1,89 @@
+* {
+    font-family: 'Bacasime Antique', serif;
+    color: white;
+}
+
+body {
+    margin: 0;
+    background-color: rgb(100, 100, 100);
+}
+
+/* toolbar */
+#toolbar {
+    display: flex;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    background-color: rgb(82, 82, 82);
+    padding: 1em 0 1em 0; 
+    justify-content: center;
+}
+#toolbar a {
+    padding-left: 2vw;
+    padding-right: 2vw;
+}
+
+/* main stylings */
+/* bumps content down to adjust for header */
+header {
+    padding-bottom: 3em;
+}
+
+/* image content */
+#main_image {
+    margin: 3vh 0 3vh 0;
+    padding: 5vw;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+#main_image img {
+    max-width: 90vw;
+}
+#main_image h1 {
+    font-family: 'Cardo', serif;
+}
+#main_image hr {
+    width: 70%;
+    margin-top: 0;
+    margin-bottom: 0;
+}
+
+/* comment section */
+#comment_section {
+    margin: 3vw 0 3vw 0;
+    display: flex;
+    flex-direction: column;
+}
+/* comment card styling */
+.comment {
+    margin: 3vw;
+    max-width: 90vw; 
+}
+.comment #profile {
+    display: flex;
+    align-items: center;
+    padding: 0 2vw 0 2vw;
+    margin: 0;
+    gap: 1vw;
+}
+#profile img {
+    max-width: 4.5vh;
+    border-radius: 50%;
+}
+#profile #name {
+    color: white;
+}
+.comment #comment {
+    color: white;
+    margin-top: 0;
+    padding: 0 2vw 0 2vw;
+}
+
+/* generic stylings */
+a {
+    color: white;
+    text-decoration: none;
+}
