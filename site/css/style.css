@@ -32,7 +32,7 @@ header {
 
 /* image content */
 #main_image {
-    margin: 3vh 0 3vh 0;
+    margin: 0 0 1vh 0;
     padding: 5vw;
     display: flex;
     flex-direction: column;
@@ -53,33 +53,32 @@ header {
 
 /* comment section */
 #comment_section {
-    margin: 3vw 0 3vw 0;
+    margin: 0 3vw 3vw 3vw;
+    max-width: 90vw; 
     display: flex;
     flex-direction: column;
 }
-/* comment card styling */
+/* comment card styling */ 
 .comment {
-    margin: 3vw;
-    max-width: 90vw; 
-}
-.comment #profile {
     display: flex;
+    border-top: 1px solid rgba(0, 0, 0, 0.493); 
     align-items: center;
-    padding: 0 2vw 0 2vw;
-    margin: 0;
-    gap: 1vw;
+    padding: 1vh 2vw 1vh 2vw;
+    gap: 2vw;
 }
-#profile img {
+.comment img {
     max-width: 4.5vh;
+    margin-top: .5vh;
+    align-self: baseline;
     border-radius: 50%;
 }
-#profile #name {
+#name {
+    margin-bottom: 1vh;
     color: white;
 }
 .comment #comment {
     color: white;
-    margin-top: 0;
-    padding: 0 2vw 0 2vw;
+    margin-top: 0; 
 }
 
 /* generic stylings */

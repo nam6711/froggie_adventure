@@ -1,40 +1,65 @@
 <!DOCTYPE html>
 <html lang="en">
-
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Bacasime+Antique&family=Cardo&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="site/css/style.css">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Bacasime+Antique&family=Cardo&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="site/css/style.css" />
+    <script src="./site/js/index.js"></script>
     <title>Froggie Adventures</title>
-</head>
+  </head>
 
-<body>
+  <body>
     <header>
-        <div id="toolbar">
-            <a href="./">Today's Adventure</a>
-            <a href="./">Previous Adventures</a>
-        </div>
+      <div id="toolbar">
+        <a href="./">Today's Adventure</a>
+        <a href="./">Previous Adventures</a>
+      </div>
     </header>
     <main>
-        <div id="main_image">
-            <img src="./site/media/placeholder.jpg" alt="placeholder">
-            <h1>Placeholder Title</h1>
-            <hr>
+      <div id="main_image">
+        <img src="./site/media/placeholder.jpg" alt="placeholder" />
+        <h1>Placeholder Title</h1>
+        <hr />
+      </div>
+      <div id="comment_section">
+        <div class="comment">
+          <img
+            src="./site/media/pfp/default_pfp.jpg"
+            alt="default profile pic"
+          />
+          <div id="content">
+            <p id="name">John Doe</p>
+            <p id="comment">
+              Lorem ipsum dolor, sit amet consectetur adipisicing elit.
+              Veritatis nam commodi illo accusamus at necessitatibus omnis ut
+              blanditiis sed laboriosam cumque vel, pariatur fuga sequi officiis
+              minus iure aspernatur iusto?
+            </p>
+          </div>
         </div>
-        <div id="comment_section">
-            <div class="comment">
-                <div id="profile">
-                    <img src="./site/media/pfp/default_pfp.jpg" alt="default profile pic">
-                    <p id="name">John Doe</p>
-                </div>
-                <p id="comment">Lorem ipsum dolor, sit amet consectetur adipisicing elit. Veritatis nam commodi illo accusamus at necessitatibus omnis ut blanditiis sed laboriosam cumque vel, pariatur fuga sequi officiis minus iure aspernatur iusto?</p>
+        <div class="comment">
+            <img
+              src="./site/media/pfp/default_pfp.jpg"
+              alt="default profile pic"
+            />
+            <div id="content">
+              <p id="name">John Doe</p>
+              <p id="comment">
+                Lorem ipsum dolor, sit amet consectetur adipisicing elit.
+                Veritatis nam commodi illo accusamus at necessitatibus omnis ut
+                blanditiis sed laboriosam cumque vel, pariatur fuga sequi officiis
+                minus iure aspernatur iusto?
+              </p>
             </div>
-        </div>
+          </div>
+      </div>
     </main>
-</body>
-
+  </body>
 </html>
