@@ -81,6 +81,11 @@ header {
     margin-top: 0; 
 }
 
+p span {
+    margin-left: 1ex;
+    font-size: 75%;
+}
+
 /* generic stylings */
 a {
     color: white;

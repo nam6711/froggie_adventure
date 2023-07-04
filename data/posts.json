@@ -1,16 +1,1 @@
-[
-    {
-        "id" : 0,
-        "comments" : [
-            {
-                "id" : 0,
-                "author" : "John Doe",
-                "profile_pic_name" : "default_pfp.jpg",
-                "description" : "Lorem ipsum dolor, sit amet consectetur adipisicing elit. Veritatis nam commodi illo accusamus at necessitatibus omnis ut blanditiis sed laboriosam cumque vel, pariatur fuga sequi officiis minus iure aspernatur iusto?",
-                "date_posted" : null
-            }
-        ],
-        "pictureName" : "1.png",
-        "title" : "Big Boys Day Out"
-    }
-]
+[{"id":0,"pictureName":"1.png","title":"Big Boys Day Out","comments":[{"id":0,"author":"John Doe","profile_pic_name":"default_pfp.jpg","description":"Lorem ipsum dolor, sit amet consectetur adipisicing elit. Veritatis nam commodi illo accusamus at necessitatibus omnis ut blanditiis sed laboriosam cumque vel, pariatur fuga sequi officiis minus iure aspernatur iusto?","date_posted":0}]},{"id":1,"pictureName":"1.png","title":"Big Boys Booty Blaster","comments":[{"id":0,"author":"John Doe","profile_pic_name":"default_pfp.jpg","description":"Lorem ipsum dolor, sit amet consectetur adipisicing elit. Veritatis nam commodi illo accusamus at necessitatibus omnis ut blanditiis sed laboriosam cumque vel, pariatur fuga sequi officiis minus iure aspernatur iusto?","date_posted":1688449608488}]}]

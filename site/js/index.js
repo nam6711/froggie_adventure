@@ -1,4 +1,4 @@
-let image_exists = false;
+let post;
 
 window.addEventListener("load", findPost)
 
@@ -6,36 +6,20 @@ async function findPost() {
     let image_id = new URLSearchParams(window.location.search).get("id"); // get image id
     let post = document.querySelector("#main_image img"); // post 
 
-    // TODO: query api and find the max post num, and then use it to establish the image id for default
-    // if id is null, then just set to default
-    if (!image_id) {
-        post.src = "./site/media/placeholder.jpg"
-        return;
+    // id can be 0, so just make sure its not null
+    if (image_id == null) {
+        let data = await fetch("http://localhost:8080/post/latest");
+        let json = await data.json(); 
+        post = new Post(json);
     }
 
-    // check if the image exists
-    // as a png
-    if (await checkIfImageExists(`./site/media/posts/${image_id}.png`, post)) 
-        return;
-    // as a jpg
-    if (await checkIfImageExists(`./site/media/posts/${image_id}.jpg`, post))
-        return;
-    // as a gif
-    if (await checkIfImageExists(`./site/media/posts/${image_id}.gif`, post))
-        return;
+    // check to see if post exists
+    let data = await fetch("http://localhost:8080/post/" + image_id);
+    // if the post doesn't exist, send to the latest post
+    
+    if (data.status === 404)
+        location = "./"
 
-    // if all else fails, then set the image ourselves
-    post.src = "./site/media/placeholder.jpg";
-    console.log("NO IMAGE FOUND WITH ID " + image_id + "PLACEHOLDER SELECTED");
-}
-
-async function checkIfImageExists(src, post) { 
-    let response = await fetch(src);
-    if (response.status !== 404) {
-        post.src = src;
-        post.alt = "frog post of the day"; 
-        return true;
-    } 
-    console.log("NO IMAGE FOUND WITH FILE EXTENSION PROPOSED");
-    return false;
+    let json = await data.json();
+    post = new Post(json);
 }
