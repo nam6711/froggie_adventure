@@ -14,6 +14,9 @@ class Post {
         this.commentSection.id = "comment_section";
         document.querySelector("main").appendChild(this.commentSection);
 
+        this.userComment = new UserComment();
+        this.commentSection.appendChild(this.userComment.html);
+
         this.createHTML();
         this.createComments();
     }

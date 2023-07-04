@@ -11,14 +11,17 @@ async function findPost() {
         let data = await fetch("http://localhost:8080/post/latest");
         let json = await data.json(); 
         post = new Post(json);
+        return;
     }
 
     // check to see if post exists
     let data = await fetch("http://localhost:8080/post/" + image_id);
     // if the post doesn't exist, send to the latest post
     
-    if (data.status === 404)
+    if (data.status === 404) {
         location = "./"
+        return;
+    }
 
     let json = await data.json();
     post = new Post(json);
