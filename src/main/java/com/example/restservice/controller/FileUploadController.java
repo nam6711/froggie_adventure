@@ -82,7 +82,7 @@ public class FileUploadController {
 			RedirectAttributes redirectAttributes) {
 		LOG.info("POST " + file.getOriginalFilename());
 
-		storageService.store(file, "./");
+		storageService.store(file, "");
 		redirectAttributes.addFlashAttribute("message",
 				"You successfully uploaded " + file.getOriginalFilename() + "!");
 
@@ -94,7 +94,7 @@ public class FileUploadController {
 			RedirectAttributes redirectAttributes) {
 		LOG.info("POST /pfp " + file.getOriginalFilename());
 		
-		storageService.store(file, "./pfp/");
+		storageService.store(file, "/pfp");
 		redirectAttributes.addFlashAttribute("message",
 				"You successfully uploaded " + file.getOriginalFilename() + "!");
 
@@ -106,7 +106,7 @@ public class FileUploadController {
 			RedirectAttributes redirectAttributes) {
 		LOG.info("POST /posts " + file.getOriginalFilename());
  
-		storageService.store(file, "./posts/");
+		storageService.store(file, "/posts");
 		redirectAttributes.addFlashAttribute("message",
 				"You successfully uploaded " + file.getOriginalFilename() + "!");
 

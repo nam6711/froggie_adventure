@@ -19,7 +19,7 @@ import org.springframework.web.multipart.MultipartFile;
 @Service
 public class FileSystemStorageService implements StorageService {
 
-	private final Path rootLocation;
+	private Path rootLocation;
 
 	@Autowired
 	public FileSystemStorageService() {
@@ -32,10 +32,17 @@ public class FileSystemStorageService implements StorageService {
 		try {
 			if (file.isEmpty()) {
 				throw new StorageException("Failed to store empty file.");
-			}
+			} 
+
+			// set location of image
+			StorageProperties properties = new StorageProperties();
+			properties.setLocation(properties.getLocation() + folder);
+			this.rootLocation = Paths.get(properties.getLocation());
+			// create path
 			Path destinationFile = this.rootLocation.resolve(
-					Paths.get(folder + file.getOriginalFilename()))
-					.normalize().toAbsolutePath();
+				Paths.get(file.getOriginalFilename())
+			).normalize().toAbsolutePath(); 
+		
 			if (!destinationFile.getParent().equals(this.rootLocation.toAbsolutePath())) {
 				// This is a security check
 				throw new StorageException(
