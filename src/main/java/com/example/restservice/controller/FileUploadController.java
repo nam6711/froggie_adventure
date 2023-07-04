@@ -22,9 +22,12 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import com.example.restservice.storage.StorageFileNotFoundException;
 import com.example.restservice.storage.StorageService;
 
+import java.util.logging.Logger; 
+
 @RestController
 @RequestMapping("image")
 public class FileUploadController {
+	private static final Logger LOG = Logger.getLogger(FileUploadController.class.getName());
 
 	private StorageService storageService;
  
@@ -34,6 +37,7 @@ public class FileUploadController {
 
 	@GetMapping("/")
 	public String listUploadedFiles(Model model) throws IOException {
+		LOG.info("GET /images");
 
 		model.addAttribute("files", storageService.loadAll().map(
 				path -> MvcUriComponentsBuilder.fromMethodName(FileUploadController.class,
@@ -46,6 +50,7 @@ public class FileUploadController {
 	@GetMapping("/{filename:.+}")
 	@ResponseBody
 	public ResponseEntity<Resource> serveDefault(@PathVariable String filename) {
+		LOG.info("GET " + filename);
 
 		Resource file = storageService.loadAsResource(filename);
 		return ResponseEntity.ok().header(HttpHeaders.CONTENT_DISPOSITION,
@@ -55,8 +60,9 @@ public class FileUploadController {
 	@GetMapping("/pfp/{filename:.+}")
 	@ResponseBody
 	public ResponseEntity<Resource> serveProfilePic(@PathVariable String filename) {
+		LOG.info("GET /pfp " + filename);
 
-		Resource file = storageService.loadAsResource(filename);
+		Resource file = storageService.loadAsResource("pfp/" + filename);
 		return ResponseEntity.ok().header(HttpHeaders.CONTENT_DISPOSITION,
 				"attachment; filename=\"" + file.getFilename() + "\"").body(file);
 	}
@@ -64,8 +70,9 @@ public class FileUploadController {
 	@GetMapping("/posts/{filename:.+}")
 	@ResponseBody
 	public ResponseEntity<Resource> servePost(@PathVariable String filename) {
+		LOG.info("GET /posts " + filename);
 
-		Resource file = storageService.loadAsResource(filename);
+		Resource file = storageService.loadAsResource("posts/" + filename);
 		return ResponseEntity.ok().header(HttpHeaders.CONTENT_DISPOSITION,
 				"attachment; filename=\"" + file.getFilename() + "\"").body(file);
 	}
@@ -73,8 +80,9 @@ public class FileUploadController {
 	@PostMapping("/")
 	public String handleFileUpload(@RequestParam("file") MultipartFile file,
 			RedirectAttributes redirectAttributes) {
+		LOG.info("POST " + file.getOriginalFilename());
 
-		storageService.store(file);
+		storageService.store(file, "./");
 		redirectAttributes.addFlashAttribute("message",
 				"You successfully uploaded " + file.getOriginalFilename() + "!");
 
@@ -84,8 +92,9 @@ public class FileUploadController {
 	@PostMapping("/pfp")
 	public String handleProfilePicUpload(@RequestParam("file") MultipartFile file,
 			RedirectAttributes redirectAttributes) {
-
-		storageService.store(file);
+		LOG.info("POST /pfp " + file.getOriginalFilename());
+		
+		storageService.store(file, "./pfp/");
 		redirectAttributes.addFlashAttribute("message",
 				"You successfully uploaded " + file.getOriginalFilename() + "!");
 
@@ -95,8 +104,9 @@ public class FileUploadController {
 	@PostMapping("/posts")
 	public String handlePostUpload(@RequestParam("file") MultipartFile file,
 			RedirectAttributes redirectAttributes) {
-
-		storageService.store(file);
+		LOG.info("POST /posts " + file.getOriginalFilename());
+ 
+		storageService.store(file, "./posts/");
 		redirectAttributes.addFlashAttribute("message",
 				"You successfully uploaded " + file.getOriginalFilename() + "!");
 

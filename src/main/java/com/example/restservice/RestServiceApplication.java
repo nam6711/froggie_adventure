@@ -16,8 +16,7 @@ public class RestServiceApplication {
 
 	@Bean
 	CommandLineRunner init(StorageService storageService) {
-		return (args) -> {
-			storageService.deleteAll();
+		return (args) -> { 
 			storageService.init();
 		};
 	}

@@ -29,9 +29,7 @@ public class PostDeserializer extends StdDeserializer<Post> {
       throws IOException, JsonProcessingException {
         JsonNode node = jp.getCodec().readTree(jp);
 
-        int id = node.get("id").asInt();
-
-        System.out.println("\n\n\n" + id + "\n\n\n");
+        int id = node.get("id").asInt(); 
 
         Map<Integer, Comment> comments = getComments(node);
         String pictureName = node.get("pictureName").asText();
