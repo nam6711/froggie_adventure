@@ -1,10 +1,18 @@
 package com.example.restservice.model;
  
-import java.util.Map; 
+import java.util.Map;
 
+import org.springframework.beans.factory.annotation.Autowired;
+
+import com.example.restservice.persistence.PostDeserializer;
+import com.example.restservice.persistence.PostSerializer;
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonProperty; 
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize; 
 
+@JsonDeserialize(using = PostDeserializer.class)
+@JsonSerialize(using = PostSerializer.class)
 public class Post {
 
     private @JsonProperty("id") int id;
@@ -29,6 +37,7 @@ public class Post {
             this.title = title;
     }
 
+    @Autowired
     public Post(@JsonProperty("id") int id, 
         @JsonProperty("pictureName") String pictureName, 
         @JsonProperty("title") String title, 
@@ -60,6 +69,10 @@ public class Post {
 
     public void setPictureName(String pictureName) {
         this.pictureName = pictureName;
+    }
+
+    public Map<Integer, Comment> getComments() {
+        return this.comments;
     }
 
     public void addComment(Comment comment) {

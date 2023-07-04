@@ -44,13 +44,11 @@ public class PostDeserializer extends StdDeserializer<Post> {
 
         // loop through and create the list of nodes
         for (JsonNode query : queries) { 
-            Timestamp comment_date = new Timestamp(query.get("date_posted").asLong());
-            
             Comment comment = new Comment(query.get("id").asInt(),
             query.get("author").asText(),
             query.get("profile_pic_name").asText(),
             query.get("description").asText(),
-            comment_date);
+            query.get("date_posted").asLong());
 
             comments.put(comment.getId(), comment);
         } 

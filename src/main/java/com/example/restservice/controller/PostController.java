@@ -30,6 +30,38 @@ public class PostController {
 		this.postDAO = postDAO;
 	}
 
+    @GetMapping("/latest/num")
+	public ResponseEntity<Integer> getLatestPostNumber() {
+		LOG.info("GET /post LATEST");
+        try {
+            Integer postNum = postDAO.getLatestPostNum();
+            if (postNum != null)
+                return new ResponseEntity<Integer>(postNum,HttpStatus.OK);
+            else
+                return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
+        catch(IOException e) {
+            LOG.log(Level.SEVERE,e.getLocalizedMessage());
+            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+	}
+
+    @GetMapping("/latest")
+	public ResponseEntity<Post> getLatestPost() {
+		LOG.info("GET /post LATEST");
+        try {
+            Post post = postDAO.getLatest();
+            if (post != null)
+                return new ResponseEntity<Post>(post,HttpStatus.OK);
+            else
+                return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
+        catch(IOException e) {
+            LOG.log(Level.SEVERE,e.getLocalizedMessage());
+            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+	}
+
 	@GetMapping("/{post_id}")
 	public ResponseEntity<Post> getPost(@PathVariable int post_id) {
 		LOG.info("GET /post " + post_id);
@@ -128,7 +160,7 @@ public class PostController {
         }
     }
 
-	@DeleteMapping("/deleteComment/{post_id}")
+	@DeleteMapping("/deleteComment/{post_id}/{comment_id}")
     public ResponseEntity<Boolean> deleteComment(@PathVariable int post_id, @PathVariable int comment_id) {
         LOG.info("DELETE /comment " + comment_id + " ON POST " + post_id);
 

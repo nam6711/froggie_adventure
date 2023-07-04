@@ -22,6 +22,8 @@ public class PostFileDAO implements PostDAO {
     private ObjectMapper objectMapper; 
 
     private int post_id_count = 0;
+    
+    private Post latestPost;
 
     private String filename;
 
@@ -32,6 +34,7 @@ public class PostFileDAO implements PostDAO {
         this.objectMapper = objectMapper;
         SimpleModule module = new SimpleModule();
         module.addDeserializer(Post.class, new PostDeserializer());
+        module.addSerializer(Post.class, new PostSerializer());
         this.objectMapper.registerModule(module);
 
         load();
@@ -75,8 +78,10 @@ public class PostFileDAO implements PostDAO {
         for (Post post : postArray) { 
             posts.put(post.getId(), post);
             // use to set the post id count where we left off
-            if (post.getId() >= this.post_id_count)
+            if (post.getId() >= this.post_id_count) {
                 post_id_count = post.getId() + 1;
+                this.latestPost = post;
+            }
         }
 
         // finish
@@ -89,6 +94,20 @@ public class PostFileDAO implements PostDAO {
 
         objectMapper.writeValue(new File(filename), postArray);
         return true;
+    }
+
+    @Override
+    public int getLatestPostNum() throws IOException {
+        synchronized (posts) {
+            return this.latestPost.getId();
+        }
+    }
+
+    @Override
+    public Post getLatest() throws IOException {
+        synchronized (posts) {
+            return this.latestPost;
+        }
     }
 
     /**
@@ -118,6 +137,8 @@ public class PostFileDAO implements PostDAO {
         synchronized (posts) { 
             post.setId(post_id_count++);
             posts.put(post.getId(), post);
+
+            this.latestPost = post;
 
             return savePosts();
         }
@@ -153,6 +174,19 @@ public class PostFileDAO implements PostDAO {
     public boolean deletePost(int post_id) throws IOException {
         synchronized(posts) {
             if (posts.containsKey(post_id)) {
+                // set latest post if THIS is the latest post
+                int count = post_id;
+                while (this.latestPost == posts.get(post_id)) {
+                    // assign until posts == null
+                    Post latest;
+                    do {
+                        --count;
+                        latest = posts.get(count);
+                    } while (latest == null && count >= 0);
+
+                    this.latestPost = latest;
+                }
+                
                 posts.remove(post_id);
                 return savePosts();
             }

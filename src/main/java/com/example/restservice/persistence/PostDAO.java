@@ -7,6 +7,10 @@ import com.example.restservice.model.Post;
 
 public interface PostDAO { 
 
+    int getLatestPostNum() throws IOException;
+
+    Post getLatest() throws IOException;
+
     /**
      * Gets a lab with the specified name as queried by a user
      * 
