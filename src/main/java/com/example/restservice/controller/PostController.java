@@ -35,10 +35,8 @@ public class PostController {
 		LOG.info("GET /post LATEST");
         try {
             Integer postNum = postDAO.getLatestPostNum();
-            if (postNum != null)
-                return new ResponseEntity<Integer>(postNum,HttpStatus.OK);
-            else
-                return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        
+            return new ResponseEntity<Integer>(postNum,HttpStatus.OK);
         }
         catch(IOException e) {
             LOG.log(Level.SEVERE,e.getLocalizedMessage());

@@ -1,12 +1,12 @@
 package com.example.restservice.controller;
 
-import java.io.IOException;
-import java.util.stream.Collectors;
+// import java.io.IOException;
+// import java.util.stream.Collectors;
  
 import org.springframework.core.io.Resource;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.ResponseEntity; 
-import org.springframework.ui.Model;
+// import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -16,7 +16,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
-import org.springframework.web.servlet.mvc.method.annotation.MvcUriComponentsBuilder;
+// import org.springframework.web.servlet.mvc.method.annotation.MvcUriComponentsBuilder;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.example.restservice.storage.StorageFileNotFoundException;
@@ -35,17 +35,17 @@ public class FileUploadController {
 		this.storageService = storageService;
 	}
 
-	@GetMapping("/")
-	public String listUploadedFiles(Model model) throws IOException {
-		LOG.info("GET /images");
+	// @GetMapping("/")
+	// public String listUploadedFiles(Model model) throws IOException {
+	// 	LOG.info("GET /images");
 
-		model.addAttribute("files", storageService.loadAll().map(
-				path -> MvcUriComponentsBuilder.fromMethodName(FileUploadController.class,
-						"serveFile", path.getFileName().toString()).build().toUri().toString())
-				.collect(Collectors.toList()));
+	// 	model.addAttribute("files", storageService.loadAll().map(
+	// 			path -> MvcUriComponentsBuilder.fromMethodName(FileUploadController.class,
+	// 					"serveFile", path.getFileName().toString()).build().toUri().toString())
+	// 			.collect(Collectors.toList()));
 
-		return "uploadForm";
-	}
+	// 	return "uploadForm";
+	// }
 
 	@GetMapping("/{filename:.+}")
 	@ResponseBody

@@ -1,6 +1,5 @@
 package com.example.restservice.model;
 
-import java.sql.Timestamp; 
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 
