@@ -1,28 +1,12 @@
-package com.example.restservice.persistence.LabDAO;
+package com.example.restservice.persistence;
 
 import java.io.IOException;
 
-import com.example.restservice.model.Lab.Lab;
-import com.example.restservice.persistence.DropdownDAO.DropdownDAO;
-import com.fasterxml.jackson.databind.JsonNode;
+import com.example.restservice.model.Comment;
+import com.example.restservice.model.Post;
 
-/**
- * Defines the interface for how to interact 
- * and manipulate Lab object persistence in JSON files
- * 
- * @author Nat Manoucheri
- */
-public interface LabDAO {
+public interface PostDAO { 
 
-    /**
-     * sets a connection to the dropdown DAO in order to allow
-     *  labs to reference the existing filters for use in building
-     *  properties
-     * 
-     * @param dropdownDAO reference to the dropdownDAO
-     */
-    void setDropdownDAO(DropdownDAO dropdownDAO);
-    
     /**
      * Gets a lab with the specified name as queried by a user
      * 
@@ -34,7 +18,7 @@ public interface LabDAO {
      * 
      * @throws IOException for any issues that may arise
      */
-    JsonNode getLab(String name) throws IOException;
+    Post getPost(int post_id) throws IOException;
 
     /**
      * Get all existing labs within the labs Map
@@ -43,7 +27,7 @@ public interface LabDAO {
      * 
      * @throws IOException for any issues that may arise
      */
-    JsonNode getLabs() throws IOException;
+    Post[] getPosts() throws IOException;
 
     /**
      * Creates and saves a {@linkplain Lab}
@@ -54,7 +38,18 @@ public interface LabDAO {
      * 
      * @throws IOException if an issue with underlying storage
      */
-    Lab createLab(Lab account) throws IOException;
+    boolean createPost(Post post) throws IOException;
+
+    /**
+     * Creates and saves a {@linkplain Lab}
+     * 
+     * @param lab {@linkplain Lab} object to be created and saved
+     *
+     * @return new {@link Lab} if successful, false otherwise 
+     * 
+     * @throws IOException if an issue with underlying storage
+     */
+    boolean createComment(int post_id, Comment comment) throws IOException;
 
     /**
      * Updates and saves a {@linkplain Lab}
@@ -66,20 +61,31 @@ public interface LabDAO {
      * 
      * @throws IOException if underlying storage cannot be accessed
      */
-    Lab updateLab(String labID, Lab lab) throws IOException;
+    Post updatePost(int post_id, Post lab) throws IOException;
 
     /**
-     * Deletes a {@linkplain Lab} with the given name
+     * Deletes a {@linkplain Post} with the given id
      * 
-     * @param name The name of the {@link Lab}
+     * @param name The name of the {@link Post}
      * 
-     * @return true if the {@link Lab} was deleted
+     * @return true if the {@link Post} was deleted
      * <br>
      * false if hero with the given name does not exist
      * 
      * @throws IOException if underlying storage cannot be accessed
      */
-    boolean deleteLab(String name) throws IOException;
+    boolean deletePost(int post_id) throws IOException;
 
-    boolean saveLabs() throws IOException;
+    /**
+     * Deletes a {@linkplain Comment} with the given id
+     * 
+     * @param name The name of the {@link Comment}
+     * 
+     * @return true if the {@link Comment} was deleted
+     * <br>
+     * false if hero with the given name does not exist
+     * 
+     * @throws IOException if underlying storage cannot be accessed
+     */
+    boolean deleteComment(int post_id, int comment_id) throws IOException;
 }

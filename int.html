@@ -1,0 +1,40 @@
+<form action="http://localhost:8080/image/" method="post" enctype="multipart/form-data">
+	<label for="file">File</label>
+	<input id="file" name="file" type="file" />
+	<button>Upload</button>
+</form>
+
+<script>
+	const form = document.querySelector('form');
+	form.addEventListener('submit', handleSubmit);
+
+	/** @param {Event} event */
+	async function handleSubmit(event) {
+		/** @type {HTMLFormElement} */
+		const form = event.currentTarget;
+		const url = new URL(form.action);
+		const formData = new FormData(form);
+		const searchParams = new URLSearchParams(formData);
+		console.log(formData)
+
+		/** @type {Parameters<fetch>[1]} */
+		const fetchOptions = {
+			method: "POST",
+		};
+
+		if (form.method.toLowerCase() === 'post') {
+			if (form.enctype === 'multipart/form-data') {
+				fetchOptions.body = formData;
+			} else {
+				fetchOptions.body = searchParams;
+			}
+		} else {
+			url.search = searchParams;
+		}
+
+		fetch(url, fetchOptions);
+		// console.log(response.status);
+
+		event.preventDefault();
+	}
+</script>
