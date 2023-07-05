@@ -6,7 +6,7 @@ async function findPost() {
     let json = {
         id: 0,
         comments : [],
-        pictureName : "../placeholder.jpg",
+        pictureName : "placeholder.jpg",
         title : "Placeholder Title"
     };
         

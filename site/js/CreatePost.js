@@ -18,7 +18,7 @@ class CreatePost {
         let file_upload = document.createElement("div");
         file_upload.innerHTML = `
         <form action="${urlImage}posts" method="POST" enctype="multipart/form-data">
-            <label for="file"><img src="./site/media/posts/${this.image_name}" alt="post of the day"></label>
+            <label for="file"><img src="${urlImage}posts/${this.image_name}" alt="post of the day"></label>
             <input id="file" name="file" type="file"/>
         </form>`; 
         this.html.appendChild(file_upload);

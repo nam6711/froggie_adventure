@@ -14,7 +14,7 @@ class Comment {
 
     createHTML() {
         let img = document.createElement("img");
-        img.src = "./site/media/pfp/" + this.profile_pic_name;
+        img.src = urlImage + "pfp/" + this.profile_pic_name;
         img.alt = "Profile Picture";
         this.html.appendChild(img);
 

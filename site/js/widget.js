@@ -27,7 +27,7 @@ function createEditWidget() {
     document.querySelector("main").appendChild(widget.html);
     
     let img = document.createElement("img");
-    img.src = "./media/posts/" + "../placeholder.jpg";
+    img.src = imageUrl + "posts/placeholder.jpg";
     img.alt = "CREATE POST";
     widget.html.appendChild(img);
     img.addEventListener("click", () => {
@@ -51,7 +51,7 @@ function createWidget(widget, num) {
     document.querySelector("main").appendChild(widget.html);
     
     let img = document.createElement("img");
-    img.src = "./media/posts/" + widget.pictureName;
+    img.src = urlImage + "posts/" + widget.pictureName;
     img.alt = "Post " + num;
     widget.html.appendChild(img);
     img.addEventListener("click", () => {

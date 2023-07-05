@@ -19,7 +19,7 @@ class UserComment {
         
         this.profile_selected = document.createElement("img");
         this.profile_selected.id = "pfp_image"
-        this.profile_selected.src = "./site/media/pfp/" + this.profile_pic_name;
+        this.profile_selected.src = urlImage + "pfp/" + this.profile_pic_name;
         this.profile_selected.alt = "Profile Picture";
         this.profile_selected.addEventListener("click", () => {
             if (this.pfp_select.style.display === "flex")
@@ -66,7 +66,7 @@ class UserComment {
 
     addPfp(container, src) {
         let img = document.createElement("img");
-        img.src = "./site/media/pfp/" + src;
+        img.src = urlImage + "pfp/" + src;
         img.id = src;
         img.classList = "pfp_item";
         img.addEventListener("click", 
@@ -78,7 +78,7 @@ class UserComment {
     }
 
     selectedPfp(selected, comment_pic) {
-        comment_pic.src = "./site/media/pfp/" + selected.id;
+        comment_pic.src = urlImage + "pfp/" + selected.id;
         this.profile_pic_name = selected.id;
         
         // FIND OLD SELECTED AND REMOVE IT
