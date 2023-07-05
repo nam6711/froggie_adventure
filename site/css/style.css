@@ -197,3 +197,44 @@ a {
     position: absolute;
     transform: translateX(85vw);
 }
+
+#left, #right {
+    cursor: pointer;
+    position: absolute; 
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    vertical-align: middle;
+    width: 3vw;
+    height: 3vw;
+    border-radius: 50%;
+    background-color: #4a88d8; 
+} 
+
+#left {
+    top: 50vh;
+    left: 1vw;
+}
+
+#right {
+    top: 50vh;
+    left: 96vw;
+}
+
+@media only screen and (max-width: 600px) {
+    #left, #right {
+        width: 7vw;
+        height: 7vw;
+    } 
+
+    #left { 
+        left: 1vw;
+        z-index: 20;
+    }
+    
+    #right { 
+        left: 92vw;
+        z-index: 20;
+    }
+}

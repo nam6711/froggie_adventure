@@ -30,6 +30,36 @@ public class PostController {
 		this.postDAO = postDAO;
 	}
 
+    @GetMapping("/prev/{post_id}")
+	public ResponseEntity<Integer> getPrevious(@PathVariable int post_id) throws IOException {
+		LOG.info("GET /prev " + post_id);
+
+        try {
+            Integer postNum = postDAO.getPrevious(post_id);
+        
+            return new ResponseEntity<Integer>(postNum,HttpStatus.OK);
+        }
+        catch(IOException e) {
+            LOG.log(Level.SEVERE,e.getLocalizedMessage());
+            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+	}
+
+    @GetMapping("/next/{post_id}")
+	public ResponseEntity<Integer> getNext(@PathVariable int post_id) throws IOException {
+        LOG.info("GET /next " + post_id);
+
+        try {
+            Integer postNum = postDAO.getNext(post_id);
+        
+            return new ResponseEntity<Integer>(postNum,HttpStatus.OK);
+        }
+        catch(IOException e) {
+            LOG.log(Level.SEVERE,e.getLocalizedMessage());
+            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+	}
+
     @GetMapping("/latest/num")
 	public ResponseEntity<Integer> getLatestPostNumber() {
 		LOG.info("GET /post LATEST");

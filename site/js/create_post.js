@@ -1,5 +1,4 @@
-let postSelected;
-let editor = true; 
+let postSelected; 
 
 window.addEventListener("load", findPost)
 

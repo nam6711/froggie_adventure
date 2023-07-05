@@ -17,7 +17,7 @@ class CreatePost {
     createHTML() { 
         let file_upload = document.createElement("div");
         file_upload.innerHTML = `
-        <form action="http://localhost:8080/image/posts" method="POST" enctype="multipart/form-data">
+        <form action="${urlImage}posts" method="POST" enctype="multipart/form-data">
             <label for="file"><img src="./site/media/posts/${this.image_name}" alt="post of the day"></label>
             <input id="file" name="file" type="file"/>
         </form>`; 
@@ -89,7 +89,7 @@ class CreatePost {
             if (response.status !== 404) {
                 json.pictureName = document.querySelector("input").files[0].name;
                 let response2 = await fetch(
-                    "http://localhost:8080/post/addPost", {    
+                    urlPost + "addPost", {    
                         method: 'POST',
                         headers: {
                            'Content-type': 'application/json'
@@ -111,7 +111,7 @@ class CreatePost {
         }
         
         let response = await fetch(
-            "http://localhost:8080/post/addPost", {    
+            urlPost + "addPost", {    
                 method: 'POST',
                 headers: {
                    'Content-type': 'application/json'

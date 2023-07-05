@@ -12,6 +12,11 @@
       rel="stylesheet"
     />
     <link rel="stylesheet" href="site/css/style.css" />
+    <script>
+      const urlPost = "http://localhost:8080/post/";
+      const urlImage = "http://localhost:8080/image/";
+      let editor = true
+    </script>
     <script src="./site/js/UserComment.js"></script>
     <script src="./site/js/Comment.js"></script>
     <script src="./site/js/CreatePost.js"></script>
@@ -19,7 +24,7 @@
     <title>Froggie Adventures</title>
   </head>
 
-  <body>
+  <body tabindex="0">
     <header>
       <div id="toolbar">
         <a href="./">Today's Adventure</a>

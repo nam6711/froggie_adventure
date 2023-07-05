@@ -20,6 +20,7 @@ public class Comment {
         final @JsonProperty("profile_pic_name") String profile_pic_name, 
         final @JsonProperty("description") String description, 
         @JsonProperty("date_posted") Long date_posted) {
+            this.id = id;
             this.author = author;
             this.profile_pic_name = profile_pic_name;
             this.description = description;

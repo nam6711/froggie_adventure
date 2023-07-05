@@ -11,6 +11,9 @@ public interface PostDAO {
 
     Post getLatest() throws IOException;
 
+    Integer getPrevious(int post_id) throws IOException;
+    Integer getNext(int post_id) throws IOException;
+
     /**
      * Gets a lab with the specified name as queried by a user
      * 

@@ -28,7 +28,7 @@ class Post {
         if (editor) { 
             let file_upload = document.createElement("div");
             file_upload.innerHTML = `
-            <form action="http://localhost:8080/image/posts" method="post" enctype="multipart/form-data">
+            <form action="${urlImage}posts" method="post" enctype="multipart/form-data">
                 <label for="file"><img src="./site/media/posts/${this.image_name}" alt="post of the day"></label>
                 <input id="file" name="file" type="file"/>
             </form>`; 
@@ -46,7 +46,9 @@ class Post {
 
         let header = document.createElement("h1");
         header.innerHTML = this.title;
-        header.contentEditable = true;
+        if (editor) {
+            header.contentEditable = true;
+        }
         this.html.appendChild(header);
 
         this.html.appendChild(document.createElement("hr"));
@@ -107,7 +109,7 @@ class Post {
             if (response.status !== 404) {
                 json.pictureName = document.querySelector("input").files[0].name;
                 let response2 = await fetch(
-                    "http://localhost:8080/post/updatePost/" + post.id, {    
+                    urlPost + "updatePost/" + post.id, {    
                         method: 'PUT',
                         headers: {
                            'Content-type': 'application/json'
@@ -127,7 +129,7 @@ class Post {
         }
         
         let response = await fetch(
-            "http://localhost:8080/post/updatePost/" + post.id, {    
+            urlPost + "updatePost/" + post.id, {    
                 method: 'PUT',
                 headers: {
                    'Content-type': 'application/json'

@@ -75,12 +75,26 @@ public class PostFileDAO implements PostDAO {
         Post[] postArray = objectMapper.readValue(new File(filename), Post[].class);
 
         // iterate through the array, placing the current lab into the labs Map
+        Post previous = null;
         for (Post post : postArray) { 
             posts.put(post.getId(), post);
             // use to set the post id count where we left off
             if (post.getId() >= this.post_id_count) {
                 post_id_count = post.getId() + 1;
                 this.latestPost = post;
+            } 
+
+            if (previous != null) {
+                previous.nextPost = post;
+                post.prevPost = previous;
+                post.nextPost = post;
+
+                previous = post;
+            } else {
+                post.prevPost = post;
+                post.nextPost = post;
+
+                previous = post;
             }
         }
 
@@ -94,6 +108,26 @@ public class PostFileDAO implements PostDAO {
 
         objectMapper.writeValue(new File(filename), postArray);
         return true;
+    }
+
+    @Override
+    public Integer getPrevious(int post_id) throws IOException {
+        synchronized (posts) {
+            Post prevPost = posts.get(post_id).prevPost;
+
+            // return prevpost if it exists, otherwise return this post
+            return (prevPost != null) ? prevPost.getId() : post_id;
+        }
+    }
+
+    @Override
+    public Integer getNext(int post_id) throws IOException {
+        synchronized (posts) {
+            Post nextPost = posts.get(post_id).nextPost;
+
+            // return prevpost if it exists, otherwise return this post
+            return (nextPost != null) ? nextPost.getId() : post_id;
+        }
     }
 
     @Override
@@ -138,6 +172,9 @@ public class PostFileDAO implements PostDAO {
             post.setId(post_id_count++);
             posts.put(post.getId(), post);
 
+            this.latestPost.nextPost = post;
+            post.prevPost = this.latestPost;
+            post.nextPost = null;
             this.latestPost = post;
 
             return savePosts();
@@ -175,17 +212,8 @@ public class PostFileDAO implements PostDAO {
         synchronized(posts) {
             if (posts.containsKey(post_id)) {
                 // set latest post if THIS is the latest post
-                int count = post_id;
-                while (this.latestPost == posts.get(post_id)) {
-                    // assign until posts == null
-                    Post latest;
-                    do {
-                        --count;
-                        latest = posts.get(count);
-                    } while (latest == null && count >= 0);
-
-                    this.latestPost = latest;
-                }
+                this.latestPost = posts.get(post_id).prevPost;
+                this.latestPost.nextPost = null;
                 
                 posts.remove(post_id);
                 return savePosts();

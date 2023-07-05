@@ -2,6 +2,7 @@
     "java.compile.nullAnalysis.mode": "automatic",
     "liveServer.settings.port": 5500,
     "liveServer.settings.ignoreFiles": [
-        "./data/posts.json"
+        "./data/posts.json",
+        "./site/media/*"
     ]
 }

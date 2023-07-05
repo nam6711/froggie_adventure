@@ -41,9 +41,10 @@ public class PostDeserializer extends StdDeserializer<Post> {
         ArrayNode queries = (ArrayNode) node.get("comments");
         Map<Integer, Comment> comments = new TreeMap<Integer, Comment>();
 
-        // loop through and create the list of nodes
-        for (JsonNode query : queries) { 
-            Comment comment = new Comment(query.get("id").asInt(),
+        // loop through and create the list of nodes 
+        int i = 0;
+        for (JsonNode query : queries) {  
+            Comment comment = new Comment(i++,
             query.get("author").asText(),
             query.get("profile_pic_name").asText(),
             query.get("description").asText(),

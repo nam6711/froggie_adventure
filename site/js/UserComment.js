@@ -33,21 +33,10 @@ class UserComment {
         this.pfp_select = document.createElement("div");
         this.pfp_select.id = "pfp_select"; 
         div.appendChild(this.pfp_select);
-        // adds the pfp's
+        // adds the pfp's 
         this.addPfp(this.pfp_select, "default_pfp.jpg")
-        this.addPfp(this.pfp_select, "default_pfp.jpg")
-        this.addPfp(this.pfp_select, "default_pfp.jpg")
-        this.addPfp(this.pfp_select, "default_pfp.jpg")
-        this.addPfp(this.pfp_select, "default_pfp.jpg")
-        this.addPfp(this.pfp_select, "default_pfp.jpg")
-        this.addPfp(this.pfp_select, "default_pfp.jpg")
-        this.addPfp(this.pfp_select, "default_pfp.jpg")
-        this.addPfp(this.pfp_select, "default_pfp.jpg")
-        this.addPfp(this.pfp_select, "default_pfp.jpg")
-        this.addPfp(this.pfp_select, "default_pfp.jpg")
-        this.addPfp(this.pfp_select, "default_pfp.jpg")
-        this.addPfp(this.pfp_select, "default_pfp.jpg")
-        this.addPfp(this.pfp_select, "../posts/1.png")
+        this.addPfp(this.pfp_select, "1.png")
+        this.addPfp(this.pfp_select, "frog.png")
 
         let content = document.createElement("div");
         this.html.appendChild(content);
@@ -109,7 +98,7 @@ class UserComment {
             "date_posted" : null,
         }
         
-        let url = "http://localhost:8080/post/addComment/" + postSelected.id;
+        let url = urlPost + "addComment/" + postSelected.id;
 
         const response = await fetch(url, {
             method: 'POST',

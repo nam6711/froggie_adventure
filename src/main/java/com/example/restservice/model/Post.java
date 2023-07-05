@@ -18,7 +18,7 @@ public class Post {
     private @JsonProperty("id") int id;
     
     private @JsonProperty("comments") Map<Integer, Comment> comments;
-    
+
     @JsonIgnore
     private int comment_id_count;
 
@@ -26,6 +26,9 @@ public class Post {
 
     private @JsonProperty("title") String title;
     
+    public Post nextPost;
+    public Post prevPost;
+
     public Post(@JsonProperty("pictureName") String pictureName, 
         @JsonProperty("title") String title, 
         @JsonProperty("comments") Map<Integer, Comment> comments) {
