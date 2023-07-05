@@ -11,7 +11,7 @@ body {
 /* toolbar */
 #toolbar {
     display: flex;
-    position: absolute;
+    position: fixed;
     top: 0;
     left: 0;
     width: 100%;
@@ -200,7 +200,7 @@ a {
 
 #left, #right {
     cursor: pointer;
-    position: absolute; 
+    position: fixed; 
     display: flex;
     justify-content: center;
     align-items: center;
