@@ -27,7 +27,7 @@ function createEditWidget() {
     document.querySelector("main").appendChild(widget.html);
     
     let img = document.createElement("img");
-    img.src = imageUrl + "posts/placeholder.jpg";
+    img.src = urlImage + "posts/placeholder.jpg";
     img.alt = "CREATE POST";
     widget.html.appendChild(img);
     img.addEventListener("click", () => {
