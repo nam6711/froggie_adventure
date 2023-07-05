@@ -36,5 +36,31 @@ class Comment {
         comment.id = "comment";
         comment.innerHTML = this.description;
         content.appendChild(comment); 
+
+        let can = document.createElement("span");
+        can.id = "trash";
+        can.innerHTML = `<i class="fa-regular fa-trash-can"></i>`;
+        can.addEventListener("click", () => this.deleteComment(this))
+        this.html.appendChild(can);
+    }
+
+    async deleteComment(comment) {
+        const post_id = postSelected.id;
+        const comment_id = comment.id;
+        const url = "http://localhost:8080/post/deleteComment/" + post_id + "/" + comment_id;
+
+        console.log(comment)
+
+        const response = await fetch(url, {
+            method: 'DELETE',
+            headers: {
+            'Content-type': 'application/json'
+            }
+        });
+
+        if (response.status !== 404)
+            comment.html.remove()
+        else 
+            alert("POST COULD NOT BE DELETED");
     }
 }

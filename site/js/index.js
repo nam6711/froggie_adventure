@@ -1,4 +1,4 @@
-let post;
+let postSelected;
 
 window.addEventListener("load", findPost)
 
@@ -10,7 +10,7 @@ async function findPost() {
     if (image_id == null) {
         let data = await fetch("http://localhost:8080/post/latest");
         let json = await data.json(); 
-        post = new Post(json);
+        postSelected = new Post(json);
         return;
     }
 
@@ -24,5 +24,5 @@ async function findPost() {
     }
 
     let json = await data.json();
-    post = new Post(json);
+    postSelected = new Post(json);
 }
