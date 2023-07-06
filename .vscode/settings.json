@@ -4,5 +4,6 @@
     "liveServer.settings.ignoreFiles": [
         "./data/posts.json",
         "./site/media/*"
-    ]
+    ],
+    "java.configuration.updateBuildConfiguration": "automatic"
 }
