@@ -14,11 +14,13 @@ class CreatePost {
         this.createHTML(); 
     }
 
-    createHTML() { 
+    async createHTML() { 
         let file_upload = document.createElement("div");
+        let url = urlImage + "posts/" + this.image_name;
+        
         file_upload.innerHTML = `
         <form action="${urlImage}posts" method="POST" enctype="multipart/form-data">
-            <label for="file"><img src="${urlImage}posts/${this.image_name}" alt="post of the day"></label>
+            <label for="file"><img src="${url}" alt="post of the day"></label>
             <input id="file" name="file" type="file"/>
         </form>`; 
         this.html.appendChild(file_upload);

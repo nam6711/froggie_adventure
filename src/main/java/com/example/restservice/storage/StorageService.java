@@ -1,23 +1,13 @@
 package com.example.restservice.storage;
-
-import org.springframework.core.io.Resource;
+ 
 import org.springframework.web.multipart.MultipartFile;
 
-import java.nio.file.Path;
-import java.util.stream.Stream;
+import com.jcraft.jsch.JSchException;
+import com.jcraft.jsch.SftpException;
+
+import java.io.IOException; 
 
 public interface StorageService {
-
-	void init();
-
-	void store(MultipartFile file, String folder);
-
-	Stream<Path> loadAll();
-
-	Path load(String filename);
-
-	Resource loadAsResource(String filename);
-
-	void deleteAll();
+	void store(MultipartFile file, String folder) throws JSchException, SftpException, IOException;
 
 }

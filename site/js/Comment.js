@@ -12,7 +12,7 @@ class Comment {
         this.createHTML();
     }
 
-    createHTML() {
+    async createHTML() {
         let img = document.createElement("img");
         img.src = urlImage + "pfp/" + this.profile_pic_name;
         img.alt = "Profile Picture";

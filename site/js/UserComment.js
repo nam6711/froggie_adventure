@@ -12,7 +12,7 @@ class UserComment {
         this.createHTML();
     }
 
-    createHTML() {
+    async createHTML() {
         let div = document.createElement("div");
         div.id = "user_pfp_select";
         this.html.appendChild(div);
@@ -64,7 +64,7 @@ class UserComment {
         commentSection.appendChild(button);
     }
 
-    addPfp(container, src) {
+    async addPfp(container, src) {
         let img = document.createElement("img");
         img.src = urlImage + "pfp/" + src;
         img.id = src;
@@ -77,7 +77,7 @@ class UserComment {
         container.appendChild(img);
     }
 
-    selectedPfp(selected, comment_pic) {
+    async selectedPfp(selected, comment_pic) {
         comment_pic.src = urlImage + "pfp/" + selected.id;
         this.profile_pic_name = selected.id;
         

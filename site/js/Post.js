@@ -24,12 +24,14 @@ class Post {
         this.createComments();
     }
 
-    createHTML() { 
+    async createHTML() { 
         if (editor) { 
             let file_upload = document.createElement("div");
+            let url = urlImage + "posts/" + this.image_name
+
             file_upload.innerHTML = `
             <form action="${urlImage}posts" method="post" enctype="multipart/form-data">
-                <label for="file"><img src="${urlImage}posts/${this.image_name}" alt="post of the day"></label>
+                <label for="file"><img src="${url}" alt="post of the day"></label>
                 <input id="file" name="file" type="file"/>
             </form>`; 
             this.html.appendChild(file_upload);
@@ -39,7 +41,7 @@ class Post {
         } else {
             let img = document.createElement("img");
             img.id = "post_img"
-            img.src = urlImage + "posts/" + this.image_name;
+            img.src = urlImage + "posts/" + this.image_name
             img.alt = "Main Post";
             this.html.appendChild(img);
         }

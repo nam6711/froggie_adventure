@@ -19,7 +19,7 @@ async function loadWidgets() {
     }
 }
 
-function createEditWidget() {
+async function createEditWidget() {
     let widget = {};
     
     widget.html = document.createElement("div");
@@ -45,7 +45,7 @@ function createEditWidget() {
     return widget.html;
 }
 
-function createWidget(widget, num) {
+async function createWidget(widget, num) {
     widget.html = document.createElement("div");
     widget.html.classList = "card";
     document.querySelector("main").appendChild(widget.html);
