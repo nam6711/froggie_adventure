@@ -27,10 +27,10 @@ class Post {
     async createHTML() { 
         if (editor) { 
             let file_upload = document.createElement("div");
-            let url = urlImage + "posts/" + this.image_name
+            let url = urlPostImage + "posts/" + this.image_name
 
             file_upload.innerHTML = `
-            <form action="${urlImage}posts" method="post" enctype="multipart/form-data">
+            <form action="${urlPostImage}posts" method="post" enctype="multipart/form-data">
                 <label for="file"><img src="${url}" alt="post of the day"></label>
                 <input id="file" name="file" type="file"/>
             </form>`; 
