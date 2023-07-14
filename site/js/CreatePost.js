@@ -101,7 +101,7 @@ class CreatePost {
                 );
 
                 if (response2.status !== 404)
-                    location = "../";
+                    location = "./";
                 else
                     alert("POST COULD NOT BE UPDATED");
 
@@ -123,7 +123,7 @@ class CreatePost {
         );
 
         if (response.status !== 404)
-            location = "../";
+            location = "./";
         else
             alert("POST COULD NOT BE UPDATED")
     } 

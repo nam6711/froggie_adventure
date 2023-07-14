@@ -121,7 +121,7 @@ class Post {
                 );
 
                 if (response2.status !== 404)
-                    location.reload()
+                    location = "./index.html?id=" + this.id;
                 else
                     alert("POST COULD NOT BE UPDATED");
             } else {
@@ -141,7 +141,7 @@ class Post {
         );
 
         if (response.status !== 404)
-            location.reload()
+            location = "./index.html?id=" + this.id;
         else
             alert("POST COULD NOT BE UPDATED")
     }
