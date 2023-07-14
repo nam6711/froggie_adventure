@@ -2,17 +2,23 @@ package com.example.restservice.persistence;
 
 import java.io.File;
 import java.io.IOException;
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.Map;
 import java.util.TreeMap;
  
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.module.SimpleModule;
+import com.jcraft.jsch.JSchException;
+import com.jcraft.jsch.SftpException;
 
+import org.apache.tomcat.util.http.fileupload.FileUtils;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.example.restservice.model.Post;
+import com.example.restservice.storage.FileSystemStorageService;
 import com.example.restservice.model.Comment; 
 
 @Component
@@ -70,9 +76,9 @@ public class PostFileDAO implements PostDAO {
 
     private boolean load() throws IOException {
         posts = new TreeMap<>();
-
+        
         // loads all labs from JSON and maps into an array of Labs
-        Post[] postArray = objectMapper.readValue(new File(filename), Post[].class);
+        Post[] postArray = objectMapper.readValue(new URL("https://people.rit.edu/nam6711/froggie-adventures/site/media/posts.json"), Post[].class);
 
         // iterate through the array, placing the current lab into the labs Map
         Post previous = null;
@@ -107,6 +113,18 @@ public class PostFileDAO implements PostDAO {
         Post[] postArray = getPostArray();
 
         objectMapper.writeValue(new File(filename), postArray);
+
+        // grab file and save to the sftp client
+        try {
+            FileSystemStorageService fsss = new FileSystemStorageService();
+            fsss.store(new File(filename), "");
+        } catch (IOException exception) {
+            exception.printStackTrace();
+        } catch (JSchException jSchException) {
+            jSchException.printStackTrace();
+        } catch (SftpException sftpException) {
+            sftpException.printStackTrace();
+        }
         return true;
     }
 
@@ -211,9 +229,17 @@ public class PostFileDAO implements PostDAO {
     public boolean deletePost(int post_id) throws IOException {
         synchronized(posts) {
             if (posts.containsKey(post_id)) {
+                Post post = posts.get(post_id);
                 // set latest post if THIS is the latest post
-                this.latestPost = posts.get(post_id).prevPost;
-                this.latestPost.nextPost = null;
+                if (this.latestPost == post) {
+                    this.latestPost = post.prevPost;
+                }    
+
+                // fix linked list order
+                if (post.prevPost != null)
+                    post.prevPost.nextPost = post.nextPost;
+                if (post.nextPost != null)
+                    post.nextPost.prevPost = post.prevPost;
                 
                 posts.remove(post_id);
                 return savePosts();

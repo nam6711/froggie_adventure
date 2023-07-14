@@ -1,5 +1,6 @@
 package com.example.restservice.storage;
 
+import java.io.File;
 import java.io.IOException;
 import java.io.InputStream; 
 import java.nio.file.Path;
@@ -49,6 +50,18 @@ public class FileSystemStorageService implements StorageService {
 		InputStream inputStream = file.getInputStream();
 
 		channelSftp.put(inputStream, remoteDir + file.getOriginalFilename());      
+
+        channelSftp.exit();
+    }   
+ 
+    public void store(File file, String folder) throws JSchException, SftpException, IOException {
+        ChannelSftp channelSftp = setupJsch();
+        channelSftp.connect();
+      
+        String remoteDir = "www/froggie-adventures/site/media" + folder + "/"; 
+		System.out.println("\n\n\n" + remoteDir); 
+
+		channelSftp.put(file.getAbsolutePath(), remoteDir + file.getName());      
 
         channelSftp.exit();
     }   
